@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 03:38:21 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/04/15 03:38:22 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/04/15 03:53:38 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+#include <limits.h>
 
 char	*get_next_line(int fd);
 size_t	ft_strchr(const char *s, int c);

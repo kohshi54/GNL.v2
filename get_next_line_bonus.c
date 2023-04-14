@@ -6,12 +6,11 @@
 /*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 03:38:29 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/04/15 03:41:25 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/04/15 03:53:34 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <limits.h>
 
 char	*get_next_line(int fd)
 {
