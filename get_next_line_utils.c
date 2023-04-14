@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/15 03:14:04 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/04/15 03:17:06 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strchr(const char *s, int c)
 {
-	size_t  i;
+	size_t	i;
 
 	if (!s)
 		return (0);
@@ -42,7 +54,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 	return (head);
 }
 
-size_t	my_read(int fd, char *buf, char *save)
+size_t	my_read(int fd, char *buf, char **save)
 {
 	ssize_t	read_byte;
 
@@ -51,8 +63,8 @@ size_t	my_read(int fd, char *buf, char *save)
 		return (0);
 	else if (read_byte == -1)
 	{
-		free(save);
-		save = NULL;
+		free(*save);
+		*save = NULL;
 		return (0);
 	}
 	buf[read_byte] = '\0';
@@ -84,28 +96,23 @@ char	*get_line(char *save, size_t byte_to_nl, size_t byte_to_end)
 	return (head);
 }
 
-char	*update_save(char *save, char *line, size_t byte_to_nl, size_t byte_to_end)
+char	*update_save(char *save, char **line, size_t byte_to_nl, size_t len)
 {
 	char	*p;
 	char	*s_head;
 	char	*p_head;
-	size_t	byte_to_malloc;
 
-	// if (!line || !save)
-		// return (NULL);
-	if (!byte_to_nl || (byte_to_nl == byte_to_end))
+	if (!byte_to_nl || (byte_to_nl == len))
 	{
 		free(save);
-		// save = NULL;
 		return (NULL);
 	}
-	byte_to_malloc = byte_to_end - byte_to_nl;
-	p = malloc(sizeof(char) * (byte_to_malloc + 1));
+	p = malloc(sizeof(char) * (len - byte_to_nl + 1));
 	if (!p)
 	{
 		free(save);
-		free(line);
-		line = NULL;
+		free(*line);
+		*line = NULL;
 		return (NULL);
 	}
 	p_head = p;
@@ -115,6 +122,5 @@ char	*update_save(char *save, char *line, size_t byte_to_nl, size_t byte_to_end)
 		*p++ = *save++;
 	*p = '\0';
 	free(s_head);
-	// s_head = NULL;
 	return (p_head);
 }
